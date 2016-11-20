@@ -9,6 +9,8 @@
 #include <math.h>
 #include <ctime>
 
+#pragma comment(lib,"OpenCl.lib")
+
 #define SUCCESS 0
 #define FAILURE 1
 const float leng = 1;

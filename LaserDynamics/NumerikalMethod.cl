@@ -1,4 +1,3 @@
-
 	__constant float leng = 1;
 	__constant float maxtime = 1;
 	__constant float dx = 1.0f/600;	
