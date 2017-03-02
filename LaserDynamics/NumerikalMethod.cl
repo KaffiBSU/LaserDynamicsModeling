@@ -70,6 +70,8 @@
 
 __kernel void laserDynamics(__global float* inPLUS, __global float* outPLUS,__global float* inMINUS,__global float* outMINUS)
 {	
+	printf("running the kernel\n");
+	/*
 	__private float leng = AM_L + SA_L;
 	__private float dx = leng/(numberXpoints-1);
 	__private int numberAMpoints = (int)numberXpoints*AM_L/leng;
@@ -149,7 +151,7 @@ __kernel void laserDynamics(__global float* inPLUS, __global float* outPLUS,__gl
 		//перенос границ
 		plus[0] = minus[numberOfX-1] + log(r1);
 		minus[0] = plus[numberOfX-1] + log(r2);				
-	}	
+	}*/
 
 	/*for(int i = startX; i < endX; i++){
 		outPLUS[i] = plus[i];

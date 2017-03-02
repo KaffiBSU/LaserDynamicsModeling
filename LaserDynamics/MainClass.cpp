@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
 	const char *filename = "NumerikalMethod.cl";
 	int activeTasksNumber = 1;	
 
-	while(activeTasksNumber<=maxActiveTasksNumber){	
+	//while(activeTasksNumber<=maxActiveTasksNumber){	
 
 	/*Step1: Getting platforms and choose an available one.*/
 	cl_uint numPlatforms;	
@@ -144,7 +144,7 @@ int main(int argc, char* argv[])
 		cl_mem outputBufferMINUS = clCreateBuffer(context, CL_MEM_WRITE_ONLY , numberOfX * sizeof(float), NULL, NULL); 
 
 		/*Step 8: Create kernel object */			
-		cl_kernel kernel = clCreateKernel(program,"teploprovodnost", NULL);
+		cl_kernel kernel = clCreateKernel(program,"laserDynamics", NULL);
 
 		/*Step 9: Sets Kernel arguments.*/
 		status = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *)&inputBufferPLUS);
@@ -156,7 +156,9 @@ int main(int argc, char* argv[])
 
 		/*Step 10: Running the kernel.*/
 		size_t global_work_size[1] = {activeTasksNumber};
-		status = clEnqueueNDRangeKernel(commandQueue, kernel, 1, NULL, global_work_size, NULL, 0, NULL, NULL);		
+		status = clEnqueueNDRangeKernel(commandQueue, kernel, 1, NULL, global_work_size, NULL, 0, NULL, NULL);
+
+		cout << "kernel executed\n";
 
 		/*Step 11: Read the cout put back to host memory.*/
 		status = clEnqueueReadBuffer(commandQueue, outputBufferPLUS, CL_TRUE, 0, numberOfX * sizeof(cl_float), outputPLUS, 0, NULL, NULL);
@@ -178,11 +180,11 @@ int main(int argc, char* argv[])
 		status = clReleaseContext(context);				    //Release context.			
 
 		//output to the console	
-		/*for(int i=0;i<numberOfX*10;i++){
+		/*for(int i=0;i<numberOfX;i++){
 			printf("outputPLUS[ %d ] = %f \n",i,outputPLUS[i]);	
 		}
 		cout<<""<<endl;
-		for(int i=0;i<numberOfX*10;i++){
+		for(int i=0;i<numberOfX;i++){
 			printf("outputMINUS[ %d ] = %f \n",i,outputMINUS[i]);	
 		} */
 	
@@ -204,7 +206,7 @@ int main(int argc, char* argv[])
 					
 	}
 
-	activeTasksNumber*=2;
-	}	
+	//activeTasksNumber*=2;
+	//}	
 	return SUCCESS;
 }
