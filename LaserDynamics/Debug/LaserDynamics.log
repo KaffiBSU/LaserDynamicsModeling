@@ -1,19 +1,14 @@
-﻿Построение начато 20.11.2016 22:35:28.
-     1>Проект "D:\Сергей\Универ\магистратура\Моделирование_код\LaserDynamicsModeling\LaserDynamics\LaserDynamics.vcxproj" в узле 2 (целевые объекты Rebuild).
+﻿Build started 05.03.2017 13:58:31.
+     1>Project "d:\Text\БГУ\Программирование\Моё\LaserDynamicsModeling\LaserDynamics\LaserDynamics.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         D:\ProgramFiles\VisualStudio\VC\bin\CL.exe /c /I../../../../../include /I../../../../../include/SDKUtil /I"C:\Program Files (x86)\AMD APP SDK\3.0\/include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt MainClass.cpp
-         MainClass.cpp
-     1>d:\сергей\универ\магистратура\моделирование_код\laserdynamicsmodeling\laserdynamics\mainclass.cpp(18): warning C4305: инициализация: усечение из "double" к "const float"
-     1>d:\сергей\универ\магистратура\моделирование_код\laserdynamicsmodeling\laserdynamics\mainclass.cpp(19): warning C4305: инициализация: усечение из "double" к "const float"
-     1>d:\сергей\универ\магистратура\моделирование_код\laserdynamicsmodeling\laserdynamics\mainclass.cpp(20): warning C4244: инициализация: преобразование "const float" в "const int", возможна потеря данных
-     1>d:\сергей\универ\магистратура\моделирование_код\laserdynamicsmodeling\laserdynamics\mainclass.cpp(21): warning C4244: инициализация: преобразование "const float" в "const int", возможна потеря данных
-     1>d:\сергей\универ\магистратура\моделирование_код\laserdynamicsmodeling\laserdynamics\mainclass.cpp(120): warning C4996: 'clCreateCommandQueue': объявлен deprecate
-                 c:\program files (x86)\amd app sdk\3.0\include\cl\cl.h(1359): см. объявление "clCreateCommandQueue"
+         D:\Program Files\MS Visual Studio\VC\bin\CL.exe /c /I"D:\Program Files\CUDA\Development\include\\" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Source.cpp
+         Source.cpp
+     1>d:\text\бгу\программирование\моё\laserdynamicsmodeling\laserdynamics\source.cpp(14): warning C4244: 'initializing' : conversion from 'const float' to 'const int', possible loss of data
        Link:
-         D:\ProgramFiles\VisualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Сергей\Универ\магистратура\Моделирование_код\LaserDynamicsModeling\Debug\LaserDynamics.exe" /INCREMENTAL /NOLOGO /LIBPATH:..\..\..\..\..\lib\win32\ /LIBPATH:"C:\Program Files (x86)\AMD APP SDK\3.0\\lib\x86\\" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Сергей\Универ\магистратура\Моделирование_код\LaserDynamicsModeling\Debug\LaserDynamics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Сергей\Универ\магистратура\Моделирование_код\LaserDynamicsModeling\Debug\LaserDynamics.lib" /MACHINE:X86 Debug\MainClass.obj
-         LaserDynamics.vcxproj -> D:\Сергей\Универ\магистратура\Моделирование_код\LaserDynamicsModeling\Debug\LaserDynamics.exe
-     1>Построение проекта "D:\Сергей\Универ\магистратура\Моделирование_код\LaserDynamicsModeling\LaserDynamics\LaserDynamics.vcxproj" завершено (целевые объекты Rebuild).
+         D:\Program Files\MS Visual Studio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Text\БГУ\Программирование\Моё\LaserDynamicsModeling\Debug\LaserDynamics.exe" /INCREMENTAL /NOLOGO /LIBPATH:"D:\Program Files\CUDA\Development\lib\Win32" OpenCL.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Text\БГУ\Программирование\Моё\LaserDynamicsModeling\Debug\LaserDynamics.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Text\БГУ\Программирование\Моё\LaserDynamicsModeling\Debug\LaserDynamics.lib" /MACHINE:X86 Debug\Source.obj
+         LaserDynamics.vcxproj -> D:\Text\БГУ\Программирование\Моё\LaserDynamicsModeling\Debug\LaserDynamics.exe
+     1>Done Building Project "d:\Text\БГУ\Программирование\Моё\LaserDynamicsModeling\LaserDynamics\LaserDynamics.vcxproj" (Build target(s)).
 
-Построение успешно завершено.
+Build succeeded.
 
-Затраченное время: 00:00:00.98
+Time Elapsed 00:00:02.35
