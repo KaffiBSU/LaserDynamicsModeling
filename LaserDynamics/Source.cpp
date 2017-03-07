@@ -1,4 +1,4 @@
-#include <utility>
+п»ї#include <utility>
 #include <CL/cl.hpp>
 #include <vector>
 #include <cstdio>
@@ -8,17 +8,17 @@
 #include <string>
 #include <iterator>
 
-const size_t xpoints = 10; // число разбиений по пространству
+const size_t xpoints = 10; // С‡РёСЃР»Рѕ СЂР°Р·Р±РёРµРЅРёР№ РїРѕ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІСѓ
 const float tmax = 10E-4f;
-const float dt = 50E-5f; // можно вычислять по соотношению из численной схемы
-const int tpoints = tmax / dt; // потери данных; для шага по времени, возможно, некритично
+const float dt = 50E-5f; // РјРѕР¶РЅРѕ РІС‹С‡РёСЃР»СЏС‚СЊ РїРѕ СЃРѕРѕС‚РЅРѕС€РµРЅРёСЋ РёР· С‡РёСЃР»РµРЅРЅРѕР№ СЃС…РµРјС‹
+const int tpoints = tmax / dt; // РїРѕС‚РµСЂРё РґР°РЅРЅС‹С…; РґР»СЏ С€Р°РіР° РїРѕ РІСЂРµРјРµРЅРё, РІРѕР·РјРѕР¶РЅРѕ, РЅРµРєСЂРёС‚РёС‡РЅРѕ
 
 void SetToZero(float *u)
 {
 	for (int i = 0; i < xpoints; i++) u[i] = 0;
 }
 
-/* проверка ошибок */
+/* РїСЂРѕРІРµСЂРєР° РѕС€РёР±РѕРє */
 inline void checkErr(cl_int err, const char * name) {
 	if (err != CL_SUCCESS) {
 		std::cerr << "ERROR: " << name << " (" << err << ")" << std::endl;
@@ -27,7 +27,7 @@ inline void checkErr(cl_int err, const char * name) {
 }
 
 int main(void){
-	cl_int err; // переменная для кодов ошибок
+	cl_int err; // РїРµСЂРµРјРµРЅРЅР°СЏ РґР»СЏ РєРѕРґРѕРІ РѕС€РёР±РѕРє
 
 	std::vector< cl::Platform > platformList;
 	cl::Platform::get(&platformList);
@@ -35,27 +35,27 @@ int main(void){
 	std::cerr << "Platform number is: " << platformList.size() << std::endl;
 
 	std::string platformVendor;
-	platformList[0].getInfo((cl_platform_info)CL_PLATFORM_VENDOR, &platformVendor); // выбор платформы
+	platformList[0].getInfo((cl_platform_info)CL_PLATFORM_VENDOR, &platformVendor); // РІС‹Р±РѕСЂ РїР»Р°С‚С„РѕСЂРјС‹
 	std::cerr << "Current platform is by: " << platformVendor << std::endl;
 
 	std::vector< cl::Device > deviceList;
 	std::string deviceVendor;
-	platformList[0].getDevices(CL_DEVICE_TYPE_ALL, &deviceList); // выбор устройства
+	platformList[0].getDevices(CL_DEVICE_TYPE_ALL, &deviceList); // РІС‹Р±РѕСЂ СѓСЃС‚СЂРѕР№СЃС‚РІР°
 	std::cerr << "Device number is: " << deviceList.size() << std::endl;
 	deviceList[0].getInfo(CL_DEVICE_NAME, &deviceVendor);
 	std::cerr << "Current device name is: " << deviceVendor << std::endl;
 
-	/* здесь указываем платформу и тип устройства для контекста */
+	/* Р·РґРµСЃСЊ СѓРєР°Р·С‹РІР°РµРј РїР»Р°С‚С„РѕСЂРјСѓ Рё С‚РёРї СѓСЃС‚СЂРѕР№СЃС‚РІР° РґР»СЏ РєРѕРЅС‚РµРєСЃС‚Р° */
 	cl_context_properties cprops[3] = { CL_CONTEXT_PLATFORM, (cl_context_properties)(platformList[0])(), 0 };
 	cl::Context context(CL_DEVICE_TYPE_CPU, cprops, NULL, NULL, &err);
 	checkErr(err, "Context::Context()");
 
-	/* ассоциирование устройств с контекстом */
+	/* Р°СЃСЃРѕС†РёРёСЂРѕРІР°РЅРёРµ СѓСЃС‚СЂРѕР№СЃС‚РІ СЃ РєРѕРЅС‚РµРєСЃС‚РѕРј */
 	std::vector<cl::Device> devices;
 	devices = context.getInfo<CL_CONTEXT_DEVICES>();
 	checkErr(devices.size() > 0 ? CL_SUCCESS : -1, "devices.size() > 0");
 
-	/* создание буферов */
+	/* СЃРѕР·РґР°РЅРёРµ Р±СѓС„РµСЂРѕРІ */
 	float * inputPlus = new float[xpoints]; // double?
 	SetToZero(inputPlus);
 
@@ -82,7 +82,7 @@ int main(void){
 	cl::Buffer outputMinusBuffer(context, CL_MEM_WRITE_ONLY | CL_MEM_USE_HOST_PTR, xpoints * sizeof(float), outputMinus, &err);
 	checkErr(err, "Buffer::Buffer()");
 
-	/* создание объекта программы */
+	/* СЃРѕР·РґР°РЅРёРµ РѕР±СЉРµРєС‚Р° РїСЂРѕРіСЂР°РјРјС‹ */
 	std::ifstream file("kernel.cl");
 	checkErr(file.is_open() ? CL_SUCCESS : -1, "kernel.cl");
 	std::string prog(std::istreambuf_iterator<char>(file), (std::istreambuf_iterator<char>()));
@@ -92,7 +92,7 @@ int main(void){
 	std::cout << program.getBuildInfo <CL_PROGRAM_BUILD_LOG>(devices[0]) << std::endl;
 	checkErr(err, "Program::build()");
 
-	/* создание ядра и задание аргументов */
+	/* СЃРѕР·РґР°РЅРёРµ СЏРґСЂР° Рё Р·Р°РґР°РЅРёРµ Р°СЂРіСѓРјРµРЅС‚РѕРІ */
 	cl::Kernel kernel(program, "solver", &err);
 	checkErr(err, "Kernel::Kernel()");
 	err = kernel.setArg(0, inputPlusBuffer);
@@ -103,21 +103,21 @@ int main(void){
 	checkErr(err, "Kernel::setArg()");
 	err = kernel.setArg(3, outputMinusBuffer);
 	checkErr(err, "Kernel::setArg()");
-	err = kernel.setArg(4, (int)xpoints); // костыль с (int), но вроде нормально
+	err = kernel.setArg(4, (int)xpoints); // РєРѕСЃС‚С‹Р»СЊ СЃ (int), РЅРѕ РІСЂРѕРґРµ РЅРѕСЂРјР°Р»СЊРЅРѕ
 	checkErr(err, "Kernel::setArg()");
 
-	/* создание очереди */
+	/* СЃРѕР·РґР°РЅРёРµ РѕС‡РµСЂРµРґРё */
 	cl::CommandQueue queue(context, devices[0], 0, &err);
 	checkErr(err, "CommandQueue::CommandQueue()");
 	cl::Event event;
 
-	/* вычисления */
+	/* РІС‹С‡РёСЃР»РµРЅРёСЏ */
 	for (int i = 0; i < tpoints; i++)
 	{
 		err = queue.enqueueNDRangeKernel(kernel, cl::NullRange, cl::NDRange(xpoints), cl::NullRange, NULL, &event);
 		checkErr(err, "ComamndQueue::enqueueNDRangeKernel()");
 
-		/* чтение буферов */
+		/* С‡С‚РµРЅРёРµ Р±СѓС„РµСЂРѕРІ */
 		event.wait();
 		err = queue.enqueueReadBuffer(outputPlusBuffer, CL_TRUE, 0, xpoints * sizeof(float), outputPlus);
 		checkErr(err, "CommandQueue::enqueueReadBuffer()");
@@ -137,11 +137,11 @@ int main(void){
 		}
 		std::cout << std::endl;
 
-		/* переброс указателей */
+		/* РїРµСЂРµР±СЂРѕСЃ СѓРєР°Р·Р°С‚РµР»РµР№ */
 		std::swap(inputPlus, outputPlus);
 		std::swap(inputMinus, outputMinus);
 
-		/* перезапись входных буферов */
+		/* РїРµСЂРµР·Р°РїРёСЃСЊ РІС…РѕРґРЅС‹С… Р±СѓС„РµСЂРѕРІ */
 		err = queue.enqueueWriteBuffer(inputPlusBuffer, CL_TRUE, 0, xpoints * sizeof(float), inputPlus);
 		checkErr(err, "CommandQueue::enqueueWriteBuffer()");
 		err = queue.enqueueWriteBuffer(inputMinusBuffer, CL_TRUE, 0, xpoints * sizeof(float), inputMinus);
